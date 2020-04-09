@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  sdlv4Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: sdlv4App
+      Handler: lambda.handler
+      Runtime: ruby2.5
+      CodeUri: s3://sdl-lambda-ankita/3d1374f2d797160390da34f29a5a6226
+      MemorySize: 512
+      Timeout: 30
+      Events:
+        sdlv4Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+            RestApiId:
+              Ref: sdlv4API
+  sdlv4API:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: sdlv4API
+      StageName: Prod
+      DefinitionBody:
+        swagger: '2.0'
+        basePath: /Prod
+        info:
+          title:
+            Ref: AWS::StackName
+        paths:
+          /{proxy+}:
+            x-amazon-apigateway-any-method:
+              responses: {}
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${sdlv4Function.Arn}/invocations
+                passthroughBehavior: when_no_match
+                httpMethod: POST
+                type: aws_proxy
+          /:
+            get:
+              responses: {}
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${sdlv4Function.Arn}/invocations
+                passthroughBehavior: when_no_match
+                httpMethod: POST
+                type: aws_proxy
+  ConfigLambdaPermission:
+    Type: AWS::Lambda::Permission
+    DependsOn:
+    - sdlv4Function
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: sdlv4Function
+      Principal: apigateway.amazonaws.com
+Outputs:
+  sdlv4AppUrl:
+    Description: App endpoint URL
+    Value:
+      Fn::Sub: https://${sdlv4API}.execute-api.${AWS::Region}.amazonaws.com/Prod/

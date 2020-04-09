@@ -1,0 +1,99 @@
+<div class="lighter" about="/about/" property="schema:about" resource="/" typeof="schema:WebPage">
+<section class="content" property="schema:description">
+  <h1>About the Structured Data Linter</h1>
+  <p>
+    The Structured Data
+    <span about="/" property="schema:applicationCategory" resource="https://www.wikidata.org/wiki/Q1727373">Linter</span>
+    is a tool aiding webmasters and web developers
+    to verify the structured data present in their HTML pages. Search engines
+    use structured data to understand webpages more accurately and to present
+    enhanced search results. The Linter understands the <a
+    href="http://www.w3.org/TR/microdata-rdf/">microdata</a>, <a
+    href="http://www.w3.org/TR/2013/CR-json-ld-20130910/">JSON-LD</a> and <a
+    href="http://www.w3.org/TR/2013/REC-html-rdfa-20130822/">RDFa</a> formats
+    according to their latest specifications. Note however that it does not
+    guarranty that all consumers (e.g. search engines) will make use of all the
+    structured data available in your page. The linter does not currently
+    support <a href="http://microformats.org/">microformats</a> (contributions
+    welcome).
+  </p>
+  <p>In addition to providing snippet visualizations for <a href="http://schema.org/">schema.org</a>,
+    the linter performs limited vocabulary validations for schema.org,
+    <a href="http://purl.org/dc/terms/">Dublin Core Metadata Terms</a>,
+    <a href="http://xmlns.com/foaf/0.1/">Friend of a Friend (FOAF)</a>,
+    <a href="http://purl.org/goodrelations/v1#">GoodRelations</a>,
+    <a href="http://ogp.me/ns#">Facebook's Open Graph Protocol</a>,
+    <a href="http://rdfs.org/sioc/">Semantically-Interlinked Online Communities (SIOC)</a>,
+    <a href="http://www.w3.org/2004/02/skos/core#">Facebook's Open Graph Protocol</a>,
+    <a href="http://ogp.me/ns#">Simple Knowledge Organization System (SKOS)</a>, and
+    <a href="http://www.data-vocabulary.org">Data-Vocabulary.org</a>.
+  <p>
+    The Structured Data Linter was initiated by <a about="/" property="schema:author"
+    href="http://openspring.net/">Stéphane Corlosquet</a> and <a about="/" property="schema:author"
+    href="http://greggkellogg.net/foaf#me">
+    <span resource="http://greggkellogg.net/foaf#me" typeof="schema:Person">
+      <span property="schema:givenName">Gregg</span>
+      <span property="schema:familyName">Kellogg</span>
+    </span>
+  </a>, as part of the larger <a about="/" property="schema:applicationSuite"
+    href="http://structured-data.org">Structured Data initiative</a>. Community
+    input is welcome to improve this tool, suggest new features, etc. Anyone
+    can contribute by filing <a
+    href="https://github.com/structured-data/linter/issues">issues</a> on
+    Github or forking the <a
+    href="https://github.com/structured-data/linter">linter git repository</a>.
+  </p>
+  <p>
+    Find out more about using rich formats at <a target="_blank"
+    href="http://structured-data.org/">structured-data.org</a>.
+  </p>
+  <p>
+    This is version <%=RDF::Linter::VERSION%> of the Structured Data Linter is based on <a
+    href="https://rubygems.org/gems/rdf">RDF.rb</a>, <a
+    href="https://rubygems.org/gems/rdf-reasoner">RDF::Reasoner</a>, along
+    parsers and serializers included in <a
+    href="https://rubygems.org/gems/linkeddata">linkeddata</a> gems developed
+    in the Ruby programming language. This service is implemented using Sinatra
+    and runs curtosey of <a href="https://heroku.com">Heroku</a>. The linter
+    and many of the gems used to implement it are open-source and public domain.
+  </p>
+  <section>
+    <h2>Programatic Access to the Linter</h2>
+    <p>The Linter is implemented as an HTML Web Application, with most of the work
+      performed via Ajax requests using a JSON content type. This allows applications
+      to interact with the Linter directly through using JSON requests.
+      To do this, construct an HTTP GET request using the <code>Accept: application/json</code>
+      HTTP header with a <code>url</code> query parameter referencing the page to be processed.
+      For example:
+    </p>
+    <pre>curl -H 'Accept: application/json' <%= url('/') %>?url=<%= url('/') %></pre>
+    <p>This will return a JSON object containing the following keys:</p>
+    <dl class="dl-horizontal">
+      <dt>snippet</dt><dd>Generated Snippets in HTML</dd>
+      <dt>html</dt><dd>Generated Tabular structured representation in HTML.</dd>
+      <dt>messages</dt><dd>Linter warnings; ideally, this should be empty.</dd>
+      <dt>statistics</dt><dd>Statistics about parsed triples and snippet templates used.</dd>
+      <dt>debug</dt><dd>Extensive debugging output, if the <code>debug</code> query parameter is passed.</dd>
+    </dl>
+    <p>Looking something like the following:</p>
+    <pre>{
+  "snippet": "...",
+  "html": "...",
+  "messages": [],
+  "statistics": {"count": 9, "templates": []}
+}</pre>
+  </section>
+  <section>
+    <h2>Contributions</h2>
+    <p>The Structured Data Linter is a free service, with limited hosting resources. To help
+      offset costs in hosting, maintaining and enhancing this service, consider contributing any amount.
+    </p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="hosted_button_id" value="KKUPSDNKDBDCG">
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+      <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+  </section>
+</section>
+</div>

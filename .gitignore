@@ -1,0 +1,9 @@
+/.bundle/
+/vendor/
+/.yardoc/
+/doc/
+/tmp/
+/coverage/
+/cache/
+/.byebug_history
+/public/assets/
