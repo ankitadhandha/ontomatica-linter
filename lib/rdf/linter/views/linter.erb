@@ -1,14 +1,14 @@
 <div ng-controller="LinterController">
   <div class="lighter">
     <p>
-      Enter a URL below to see what structured data your page contains. You can alternatively upload a local file or paste some markup.
-      Read more <a href="/about/" target="_self">about the Structured Data linter</a>.
+      Enter a URL below to see what structured data your page contains: <!-- You can alternatively upload a local file or paste some markup.
+      Read more <a href="/about/" target="_self">about the Structured Data linter</a>.-->
     </p>
-    <ul class="nav nav-tabs linter">
+<!--    <ul class="nav nav-tabs linter">
       <li><a href="" class="url" ng-class="getClass('url')" ng-click="fieldset = 'url'">Lint by URL</a></li>
       <li><a href="" class="upload" ng-class="getClass('upload')" ng-click="fieldset = 'upload'">Lint by File Upload</a></li>
       <li><a href="" class="input" ng-class="getClass('input')" ng-click="fieldset = 'input'">Lint by Direct Input</a></li>
-    </ul>
+    </ul> -->
     <form id="linter_input">
       <fieldset class="input-group" ng-show="fieldset === 'url'">
         <legend>Page URL</legend>
@@ -20,7 +20,7 @@
           <input id="verify-ssl" type="checkbox"  ng-model="verifySSL" />
         </fieldset>
         <br/>
-        <span class="form-examples">Examples:
+        <!-- <span class="form-examples">Examples:
         <% {Review: "ClaimReview-320", Person: "eg-1", Event: "eg-9", Recipe: "eg-13", Product: "eg-10"}.each do |name, p|%>
           <%= name %> (
           <% {RDFa: "rdfa", "JSON-LD": "jsonld", MD: "microdata"}.each do |fmt, c|
@@ -31,7 +31,7 @@
             <a href="" ng-click="lintUrl('<%= path %>')" title="Show <%=name%> snippet in <%=fmt%>"><%=fmt %></a>
           <% end -%>)
         <% end -%>
-        </span>
+        </span>-->
       </fieldset>
 
       <fieldset class="input-group" ng-show="fieldset === 'upload'">
