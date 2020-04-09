@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: "sketch-rockwell";
-  src: url("<%= image_path 'SketchRockwell-Bold.ttf' %>");
+  src: url("https://sdl-lambda.s3.amazonaws.com/assets/css/SketchRockwell-Bold.ttf");
 }
 
 @font-face {
   font-family: "calluna";
-  src: url("<%= image_path 'Calluna-Regular.ttf' %>");
+  src: url("https://sdl-lambda.s3.amazonaws.com/assets/css/Calluna-Regular.ttf");
 }
 
 
@@ -18,13 +18,13 @@
 
 body.linter {
   color: #333;
-  background-color: #a7cb87;
+  background-color: #f7f7f7; /* #a7cb87;*/
   font-family: "calluna", Georgia, serif;
   font-size: 1.5vw;
 }
 
 body.linter a {
-  color: #926394;
+  color: #ea1331; /*#926394;*/
   text-decoration: none;
   outline-style: none;
   font-weight: bold;
@@ -51,7 +51,7 @@ body.linter p {
 }
 
 .lighter {
-  background: #c7e5ab;
+  background: #2d867126; /*  #c7e5ab;*/
   margin: 0 auto;
 }
 
@@ -98,8 +98,8 @@ form span.form-examples {
 nav.navbar {
   position: relative;
   height: 80px;
-  color: #fff;
-  background-color: #55842c;
+  color: black; /*#fff;*/
+  background-color: #2d867126; /*#55842c;*/
 }
 
 nav.navbar a.navbar-brand {
@@ -107,12 +107,12 @@ nav.navbar a.navbar-brand {
   margin-left: 25px;
   white-space:nowrap;
   font-size: 4vw;
-  font-family: "sketch-rockwell", Helvetica, Arial, serif;
+  font-family: Helvetica, Arial, serif; /* "sketch-rockwell",*/
   text-shadow: none;
-  color: #fff;
+  color: #000; /*#fff;*/
 }
 nav.navbar a.navbar-brand:hover {
-  color:      #c7e5ab;
+/*  color:      #c7e5ab;*/
 }
 
 nav.navbar ul.navbar-nav {
@@ -124,7 +124,8 @@ nav.navbar ul.navbar-nav:last-child {
 }
 
 nav.navbar .dropdown-menu {
-  background-color: rgb(85, 132, 44);
+/*  background-color: rgb(85, 132, 44);*/
+    background-color: #2d867126;
 }
 
 nav.navbar .dropdown-menu>li>a {
@@ -140,7 +141,7 @@ nav.navbar .dropdown-menu>li>a.active {
 
 nav.navbar li>a, nav.navbar li>a:link, nav.navbar li>a:visited {
   padding:            3px 12px;
-  color:              white;
+  color:              black; /*white;*/
   text-decoration:    none;
   font-size:          2vw;
 }
@@ -173,7 +174,7 @@ ul.linter>li>a, ul.linter li>a:link, ul.linter>li>a:visited {
 }
 
 ul.linter>li>a.active, ul.linter>li>a:hover {
-  color:  #55842c;
+/*  color:  #55842c;*/
 }
 
 ul.linter>li>a.active {
