@@ -1,7 +1,9 @@
 source 'http://rubygems.org'
 
 gemspec
-ruby "2.5.7"
+
+#this creates an error so commenting
+#ruby "2.5.7"
 
 # Include non-released gems first
 gem "sinatra-rdf",        git: "https://github.com/ruby-rdf/sinatra-rdf", branch: "develop"
