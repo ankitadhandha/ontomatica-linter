@@ -162,7 +162,7 @@ module RDF::Linter
         head: :examples,
         name: params[:name],
         examples: examples,
-        root: url("/")
+        root: url("/Prod/")
       }
     end
 
