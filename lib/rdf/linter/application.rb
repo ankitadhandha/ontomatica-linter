@@ -1,3 +1,4 @@
+require 'htmlentities'
 require 'sinatra'
 require 'sinatra/rdf'
 require 'sinatra/asset_pipeline'
@@ -267,6 +268,21 @@ module RDF::Linter
       writer_opts[:debug] ||= [] if logger.level <= Logger::DEBUG
       request.logger.debug graph.dump(:ttl, writer_opts)
 
+     sessionid = SecureRandom.hex(10);
+
+
+      #uri= URI.parse("http://www.ldf.fi/service/rdf-grapher?rdf=#{CGI.escape(graph.dump(:rdf, writer_opts))}&from=xml&to=svg")
+     uri = URI.parse("http://rhizomik.net/redefer-services/render?rdf=#{CGI.escape(graph.dump(:rdf, writer_opts))}&format=RDF/XML&mode=svg&rules=http://rhizomik.net/html/redefer/rdf2svg/showgraph.jrule")
+#https://gist.githubusercontent.com/ankitadhandha/bbddcc83e134891f8680b8d18b0b2$
+      ressvg = Net::HTTP.get_response(uri)
+
+#	File.write("test.svg", ressvg.body)
+      File.write("assets/images/graphsvg#{sessionid}.svg", ressvg.body) # Net::
+
+	`aws s3 cp assets/images/graphsvg#{sessionid}.svg s3://sdl-lambda/assets/images/graphsvg#{sessionid}.svg --acl public-read`
+
+	File.delete("assets/images/graphsvg#{sessionid}.svg")
+
       result = snippet = nil
       if graph.size > 0
         # Move elements with class `snippet` to the front of the root element
@@ -284,11 +300,19 @@ module RDF::Linter
         snippet.gsub!(/--root--/, root)
       end
 
+      coder= HTMLEntities.new
+
       # Return snippet, serialized graph, lint messages, and debug information
       content_type :json
       {
         snippet: snippet,
         html: result,
+	rdfa: coder.encode(graph.dump(:rdfa, writer_opts)), #rdfastring, #(graph.dump(:rdfa, writer_opts)).concat("\"").prepend("\""),
+        ttl: coder.encode(graph.dump(:ttl, writer_opts)), #(graph.dump(:ttl, writer_opts).to_str,
+        rdf: coder.encode(graph.dump(:rdf, writer_opts)), 
+	jsonld: coder.encode(graph.dump(:jsonld, writer_opts)),
+	graph: "<img src=\"https://sdl-lambda.s3.amazonaws.com/assets/images/graphsvg#{sessionid}.svg\" alt=\"svg\">",
+        sessionid: sessionid,   #request.session_options[:id],
         messages: messages.map {|k, v| v.map {|o, mm| Array(mm).map {|m| "#{k} #{o}: #{m}"}}}.flatten,
         statistics: {
           count: graph.size,

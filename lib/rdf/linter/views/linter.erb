@@ -102,13 +102,52 @@
     </div>
   </div>
 
-  <div class="results" ng-show="result">
+<div class="grid-container">
+
+<div ng-show="result" class="grid-item">
+    <h2>sessionid output</h2>
+    <p ng-show="!result.sessionid">No RDF fund.</p>
+    <div ng-bind-html="result.sessionid"></div>
+  </div>
+
+
+
+  <div ng-show="result" class="grid-item">
+    <h2>RDF output</h2>
+    <p ng-show="!result.rdf">No RDF fund.</p>
+    <div ng-bind-html="result.rdf"></div>
+  </div>
+
+ <div ng-show="result" class="grid-item">
+    <h2>ttl output</h2>
+    <p ng-show="!result.ttl">No ttl found.</p>
+<div ng-bind-html="result.ttl"></div>
+ </div>
+
+ <div ng-show="result" class="grid-item">
+     <h2>RDFa output</h2>
+     <p ng-show="!result.rdfa">No RDFa found.</p>
+     <div ng-bind-html="result.rdfa"></div>
+  </div>
+<div ng-show="result" class="grid-item">
+     <h2>JSON+LD output</h2>
+    <p ng-show="!result.jsonld">No json ld found.</p>
+    <div ng-bind-html="result.jsonld"></div>
+  </div>
+
+  <div ng-show="result" class="grid-item">
+    <h2>Graph:</h2>
+    <p ng-show="!result.graph"> No Graph Found. </p>
+    <div ng-bind-html="result.graph"></div>
+  </div>
+
+  <div class="grid-item" ng-show="result">
     <h2>Raw structured data extracted from the page:</h2>
     <p ng-show="!result.html">No structured data detected.</p>
     <div ng-bind-html="result.html"></div>
   </div>
 
-  <div ng-show="result.statistics">
+  <div ng-show="result.statistics" class="grid-item">
     <h2>Parser statistics</h2>
     <table class="stats table table-condensed">
       <tbody>
@@ -122,14 +161,14 @@
     </table>
   </div>
 
-  <div ng-show="result.messages">
+  <div ng-show="result.messages" class="grid-item">
     <h2>Linter Messages</h2>
     <p ng-repeat="message in result.messages">
       {{message}}
     </p>
   </div>
 
-  <div ng-show="result.debug">
+  <div ng-show="result.debug" class="grid-item">
     <h2>Debug Information</h2>
   <textarea rows="20" cols="120">
     {{result.debug}}
